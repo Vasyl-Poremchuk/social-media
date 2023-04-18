@@ -7,6 +7,11 @@ class Settings(BaseSettings):
     RELOAD: bool
     LOG_LEVEL: str
 
+    ALLOW_ORIGINS: list[str]
+    ALLOW_CREDENTIALS: bool
+    ALLOW_METHODS: list[str]
+    ALLOW_HEADERS: list[str]
+
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
