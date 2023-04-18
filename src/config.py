@@ -2,11 +2,6 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    HOST: str
-    PORT: int
-    RELOAD: bool
-    LOG_LEVEL: str
-
     ALLOW_ORIGINS: list[str]
     ALLOW_CREDENTIALS: bool
     ALLOW_METHODS: list[str]
