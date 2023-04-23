@@ -85,6 +85,12 @@ def update_comment(
             detail=f"Comment with comment_id: {comment_id} does not exist.",
         )
 
+    if updated_comment.user_id != current_user.user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to perform request action.",
+        )
+
     comment_query.update(comment.dict(), synchronize_session=False)
     db.commit()
 
