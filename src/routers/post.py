@@ -52,7 +52,6 @@ def get_post(
     """
     The function returns a single `post` from the database.
     """
-    # post = db.query(Post).filter(Post.post_id == post_id).first()
     post = (
         db.query(
             Post,
