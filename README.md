@@ -38,7 +38,67 @@ If you want to run the production version of the docker container, use the comma
 docker-compose -f docker-compose-prod.yml up -d
 ```
 
-### AWS deployment (EC2 instance & RDS PostgreSQL database).
+### Swagger documentation.
+
+The social media app has several endpoints available, which you can check out in the swagger documentation (use **/docs** to check).
+
+![swagger](demo/images/swagger_docs.png)
+
+### Fly.io deployment.
+
+**NOTE**: You must already be registered before deploying an application on Fly.io.
+
+If you want to deploy this application on **Fly.io**, follow the steps below:
+
+- Install flyctl:
+
+```shell
+curl -L https://fly.io/install.sh | sh (Linux or macOS)
+```
+
+```shell
+powershell -Command "iwr https://fly.io/install.ps1 -useb | iex" (Windows)
+```
+
+- Login to your Fly.io account:
+
+```shell
+flyctl auth login
+```
+
+- Create a new app on Fly.io:
+
+```shell
+flyctl launch
+```
+
+- Enter your app name (make sure it is unique).
+- Select the nearest deployment region.
+- Click **Yes** to configure a PostgreSQL instance for your app.
+- Import variables from **.env** to **Fly.io** app.
+
+```shell
+flyctl secrets import -a <your app name on Fly.io> < .env
+```
+
+- Deploy your project on Fly.io.
+
+```shell
+flyctl deploy
+```
+
+- Create tables in the database using the latest revision.
+
+```shell
+flyctl ssh console -a <your app name on Fly.io>
+
+cd /usr/src/app
+
+alembic upgrade head
+```
+
+
+### AWS deployment - EC2 instance & RDS PostgreSQL database (optional).
 
 **NOTE**: You must already be registered before deploying an application on AWS.
 
@@ -150,7 +210,7 @@ alembic upgrade head
 python3 -m uvicorn src.main:app
 ```
 
-### Heroku deployment.
+### Heroku deployment (optional).
 
 If you want to deploy this application on **Heroku**, follow the steps below:
 
