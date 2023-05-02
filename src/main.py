@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 from src.routers import auth, comment, like, post, user
 from src.config import settings
 
 app = FastAPI(title="SocialMedia")
+
+app.add_middleware(HTTPSRedirectMiddleware)
 
 app.add_middleware(
     CORSMiddleware,

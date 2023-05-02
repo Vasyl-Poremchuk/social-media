@@ -15,7 +15,7 @@ SQLALCHEMY_DATABASE_URL = (
     f"{settings.POSTGRES_DB}"
 )
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_recycle=1800)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
