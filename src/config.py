@@ -2,11 +2,6 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    ALLOW_ORIGINS: list[str]
-    ALLOW_CREDENTIALS: bool
-    ALLOW_METHODS: list[str]
-    ALLOW_HEADERS: list[str]
-
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str

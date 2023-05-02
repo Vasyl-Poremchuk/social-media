@@ -10,10 +10,6 @@ jobs:
     environment:
       name: testing
     env:
-      ALLOW_ORIGINS: ${{ secrets.ALLOW_ORIGINS }}
-      ALLOW_CREDENTIALS: ${{ secrets.ALLOW_CREDENTIALS }}
-      ALLOW_METHODS: ${{ secrets.ALLOW_METHODS }}
-      ALLOW_HEADERS: ${{ secrets.ALLOW_HEADERS }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
