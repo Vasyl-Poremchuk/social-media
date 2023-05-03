@@ -1,8 +1,0 @@
-app = "social-media-fastapi-app"
-primary_region = "waw"
-
-[http_service]
-  internal_port = 8000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
