@@ -1,5 +1,7 @@
-app = "social-media-fastapi-app"
 primary_region = "waw"
+
+[app]
+  app_name = "social-media-fastapi-app"
 
 [http_service]
   internal_port = 8000
