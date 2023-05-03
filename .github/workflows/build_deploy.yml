@@ -83,6 +83,7 @@ jobs:
     steps:
       - name: Deploy to Fly.io.
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Authenticate with Fly.io.
+        run: flyctl auth login -e ${{ secrets.FLY_EMAIL }} -p ${{ secrets.FLY_PASSWORD }}
+      - name: Deploy app to Fly.io.
+        run: flyctl deploy --remote-only
