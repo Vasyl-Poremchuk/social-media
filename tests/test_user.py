@@ -24,7 +24,7 @@ def test_create_user(client: TestClient) -> None:
 
 def test_login_user(client: TestClient, test_user: dict) -> None:
     response = client.post(
-        "/login/",
+        "/login",
         data={
             "username": test_user["email"],
             "password": test_user["password"],
@@ -61,7 +61,7 @@ def test_incorrect_login(
     status_code: str,
 ):
     response = client.post(
-        "/login/",
+        "/login",
         data={"username": email, "password": password},
     )
 

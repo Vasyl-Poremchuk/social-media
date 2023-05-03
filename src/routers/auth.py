@@ -8,10 +8,10 @@ from src.oauth2 import create_access_token
 from src.schemas import Token
 from src.utils import verify_password
 
-router = APIRouter(prefix="/login", tags=["Authentication Endpoint"])
+router = APIRouter(tags=["Authentication Endpoint"])
 
 
-@router.post("/", response_model=Token)
+@router.post("/login", response_model=Token)
 def login(
     user_credentials: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
