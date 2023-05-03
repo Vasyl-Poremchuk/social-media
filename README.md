@@ -86,6 +86,8 @@ heroku run "alembic upgrade head"
 heroku ps:restart
 ```
 
+- Check it out: [LINK](https://social-media-fastapi-app.herokuapp.com/docs).
+
 ### AWS deployment - EC2 instance & RDS PostgreSQL database (optional).
 
 **NOTE**: You must already be registered before deploying an application on AWS.
