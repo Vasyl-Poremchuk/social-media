@@ -80,10 +80,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [ build ]
+    environment:
+      name: testing
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
     steps:
       - name: Deploy to Fly.io.
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Authenticate with Fly.io.
-        run: flyctl auth login -e ${{ secrets.FLY_EMAIL }} -p ${{ secrets.FLY_PASSWORD }}
-      - name: Deploy app to Fly.io.
-        run: flyctl deploy --remote-only
+      - run: flyctl deploy --remote-only
