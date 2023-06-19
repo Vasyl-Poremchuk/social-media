@@ -1,1 +1,10 @@
-Generic single-database configuration.
+Guidelines.
+
+- To create a new revision, use the command below:
+    alembic revision --autogenerate -m "the name of your revision"
+
+- To upgrade the tables in your database, use the command below:
+    alembic upgrade <revision identifier> (in the revision file find the variable "revision")
+
+- To downgrade the tables in your database, use the command below:
+    alembic downgrade <revision identifier> (in the revision file find the variable "down_revision")
