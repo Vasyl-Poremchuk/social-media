@@ -46,4 +46,4 @@ The social media app has several endpoints available, which you can check out in
 
 ### Heroku deployment.
 
-Check it out: [LINK](https://social-media-fastapi-app.herokuapp.com/docs).
+Check it out: [LINK](https://fastapi-social-media-app-4448934fd9c8.herokuapp.com/docs).
