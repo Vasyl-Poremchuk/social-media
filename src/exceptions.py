@@ -1,97 +1,110 @@
-class UsernameFormatError(Exception):
-    """
-    Custom error that is raised when `username` does not have the right format.
-    """
-
-    def __init__(self, username: str, message: str) -> None:
-        self.username = username
-        self.message = message
-        super().__init__(message)
+from fastapi.exceptions import HTTPException
+from starlette import status
 
 
-class PasswordFormatError(Exception):
+class UsernameFormatException(HTTPException):
     """
-    Custom error that is raised when `password` does not have the right format.
+    A custom exception is raised when the `username` has an incorrect format.
     """
 
-    def __init__(self, password: str, message: str) -> None:
-        self.password = password
-        self.message = message
-        super().__init__(message)
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
 
 
-class FirstNameFormatError(Exception):
+class PasswordFormatException(HTTPException):
     """
-    Custom error that is raised when `first_name` does not have the right format.
-    """
-
-    def __init__(self, first_name: str, message: str) -> None:
-        self.first_name = first_name
-        self.message = message
-        super().__init__(message)
-
-
-class LastNameFormatError(Exception):
-    """
-    Custom error that is raised when `last_name` does not have the right format.
+    A custom exception is raised when the `password` has an incorrect format.
     """
 
-    def __init__(self, last_name: str, message: str) -> None:
-        self.last_name = last_name
-        self.message = message
-        super().__init__(message)
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
 
 
-class PhoneNumberFormatError(Exception):
+class FirstNameFormatException(HTTPException):
     """
-    Custom error that is raised when `phone_number` does not have the right format.
-    """
-
-    def __init__(self, phone_number: str, message: str) -> None:
-        self.phone_number = phone_number
-        self.message = message
-        super().__init__(message)
-
-
-class CountryFormatError(Exception):
-    """
-    Custom error that is raised when `country` does not have the right format.
+    A custom exception is raised when the `first_name` has an incorrect format.
     """
 
-    def __init__(self, country: str, message: str) -> None:
-        self.country = country
-        self.message = message
-        super().__init__(message)
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
 
 
-class RegionFormatError(Exception):
+class LastNameFormatException(HTTPException):
     """
-    Custom error that is raised when `region` does not have the right format.
-    """
-
-    def __init__(self, region: str, message: str) -> None:
-        self.region = region
-        self.message = message
-        super().__init__(message)
-
-
-class TitleFormatError(Exception):
-    """
-    Custom error that is raised when `title` does not have the right format.
+    A custom exception is raised when the `last_name` has an incorrect format.
     """
 
-    def __init__(self, title: str, message: str) -> None:
-        self.title = title
-        self.message = message
-        super().__init__(message)
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
 
 
-class ContentFormatError(Exception):
+class PhoneNumberFormatException(HTTPException):
     """
-    Custom error that is raised when `content` does not have the right format.
+    A custom exception is raised when the `phone_number` has an incorrect format.
     """
 
-    def __init__(self, content: str, message: str) -> None:
-        self.content = content
-        self.message = message
-        super().__init__(message)
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
+
+
+class CountryFormatException(HTTPException):
+    """
+    A custom exception is raised when the `country` has an incorrect.
+    """
+
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
+
+
+class RegionFormatException(HTTPException):
+    """
+    A custom exception is raised when the `region` has an incorrect format.
+    """
+
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
+
+
+class TitleFormatException(HTTPException):
+    """
+    A custom exception is raised when the `title` has an incorrect format.
+    """
+
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )
+
+
+class ContentFormatException(HTTPException):
+    """
+    A custom exception is raised when the `content` has an incorrect format.
+    """
+
+    def __init__(self, detail: str) -> None:
+        self.detail = detail
+        super().__init__(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=detail
+        )

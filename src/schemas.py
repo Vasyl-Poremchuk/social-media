@@ -5,14 +5,14 @@ from string import punctuation
 from pydantic import BaseModel, EmailStr, validator
 
 from src.exceptions import (
-    UsernameFormatError,
-    PasswordFormatError,
-    FirstNameFormatError,
-    LastNameFormatError,
-    PhoneNumberFormatError,
-    CountryFormatError,
-    TitleFormatError,
-    ContentFormatError,
+    ContentFormatException,
+    CountryFormatException,
+    FirstNameFormatException,
+    LastNameFormatException,
+    PasswordFormatException,
+    PhoneNumberFormatException,
+    TitleFormatException,
+    UsernameFormatException,
 )
 from src.models import Category
 
@@ -31,9 +31,8 @@ def validate_content(content: str) -> str:
         character.isdigit() or character.isspace() or character in punctuation
         for character in content
     ):
-        raise ContentFormatError(
-            content=content,
-            message="The `content` must contain letters.",
+        raise ContentFormatException(
+            detail="The `content` must contain letters.",
         )
     return content
 
@@ -54,29 +53,25 @@ class UserBase(BaseModel):
         The method checks if the `username` passes all validations.
         """
         if not (5 <= len(value) <= 15):
-            raise UsernameFormatError(
-                username=value,
-                message="The length of the `username` must be between 5 and 15 characters.",
+            raise UsernameFormatException(
+                detail="The length of the `username` must be between 5 and 15 characters.",
             )
 
         if any(character.isupper() for character in value):
-            raise UsernameFormatError(
-                username=value,
-                message="The `username` must not contain uppercase characters.",
+            raise UsernameFormatException(
+                detail="The `username` must not contain uppercase characters.",
             )
 
         if any(character.isspace() for character in value):
-            raise UsernameFormatError(
-                username=value,
-                message="The `username` must not contain whitespaces.",
+            raise UsernameFormatException(
+                detail="The `username` must not contain whitespaces.",
             )
 
         if any(
             character in PUNCTUATION_WITHOUT_UNDERSCORE for character in value
         ):
-            raise UsernameFormatError(
-                username=value,
-                message="The `username` must not contain any punctuation marks other than underscores.",
+            raise UsernameFormatException(
+                detail="The `username` must not contain any punctuation marks other than underscores.",
             )
 
         return value
@@ -87,40 +82,34 @@ class UserBase(BaseModel):
         The function checks if the `password` passes all validations.
         """
         if len(value) < 8:
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must be at least 8 characters long.",
+            raise PasswordFormatException(
+                detail="The `password` must be at least 8 characters long.",
             )
 
         if not any(character.isupper() for character in value):
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must contain at least one uppercase letter.",
+            raise PasswordFormatException(
+                detail="The `password` must contain at least one uppercase letter.",
             )
 
         if not any(character.islower() for character in value):
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must contain at least one lowercase letter.",
+            raise PasswordFormatException(
+                detail="The `password` must contain at least one lowercase letter.",
             )
 
         if not any(character.isdigit() for character in value):
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must contain at least one digit.",
+            raise PasswordFormatException(
+                detail="The `password` must contain at least one digit.",
             )
 
         if not any(character in punctuation for character in value):
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must contain at least one punctuation mark "
+            raise PasswordFormatException(
+                detail="The `password` must contain at least one punctuation mark "
                 "such as !#$%&'\"()*+,-/:;<=>?@[\\]^_`{|}~.",
             )
 
         if any(character.isspace() for character in value):
-            raise PasswordFormatError(
-                password=value,
-                message="The `password` must not contain whitespaces.",
+            raise PasswordFormatException(
+                detail="The `password` must not contain whitespaces.",
             )
 
         return value
@@ -132,27 +121,23 @@ class UserBase(BaseModel):
         """
         if value:
             if any(character.isspace() for character in value):
-                raise FirstNameFormatError(
-                    first_name=value,
-                    message="The `first_name` must not contain whitespaces.",
-                )
-
-            if not value.istitle():
-                raise FirstNameFormatError(
-                    first_name=value,
-                    message="The `first_name` must start with a capital letter.",
+                raise FirstNameFormatException(
+                    detail="The `first_name` must not contain whitespaces.",
                 )
 
             if any(character.isdigit() for character in value):
-                raise FirstNameFormatError(
-                    first_name=value,
-                    message="The `first_name` must not contain digits.",
+                raise FirstNameFormatException(
+                    detail="The `first_name` must not contain digits.",
                 )
 
             if any(character in punctuation for character in value):
-                raise FirstNameFormatError(
-                    first_name=value,
-                    message="The `first_name` must not contain punctuation marks.",
+                raise FirstNameFormatException(
+                    detail="The `first_name` must not contain punctuation marks.",
+                )
+
+            if not value.istitle():
+                raise FirstNameFormatException(
+                    detail="The `first_name` must start with a capital letter.",
                 )
 
         return value
@@ -164,27 +149,23 @@ class UserBase(BaseModel):
         """
         if value:
             if any(character.isspace() for character in value):
-                raise LastNameFormatError(
-                    last_name=value,
-                    message="The `last_name` must not contain whitespaces.",
-                )
-
-            if not value.istitle():
-                raise LastNameFormatError(
-                    last_name=value,
-                    message="The `last_name` must start with a capital letter.",
+                raise LastNameFormatException(
+                    detail="The `last_name` must not contain whitespaces.",
                 )
 
             if any(character.isdigit() for character in value):
-                raise LastNameFormatError(
-                    last_name=value,
-                    message="The `last_name` must not contain digits.",
+                raise LastNameFormatException(
+                    detail="The `last_name` must not contain digits.",
                 )
 
             if any(character in punctuation for character in value):
-                raise LastNameFormatError(
-                    last_name=value,
-                    message="The `last_name` must not contain punctuation marks.",
+                raise LastNameFormatException(
+                    detail="The `last_name` must not contain punctuation marks.",
+                )
+
+            if not value.istitle():
+                raise LastNameFormatException(
+                    detail="The `last_name` must start with a capital letter.",
                 )
 
         return value
@@ -196,9 +177,8 @@ class UserBase(BaseModel):
         """
         if value:
             if not PHONE_NUMBER_REGEX.match(value):
-                raise PhoneNumberFormatError(
-                    phone_number=value,
-                    message="The `phone_number` is in the wrong format.",
+                raise PhoneNumberFormatException(
+                    detail="The `phone_number` is in the wrong format.",
                 )
 
         return value
@@ -210,21 +190,18 @@ class UserBase(BaseModel):
         """
         if value:
             if any(character in punctuation for character in value):
-                raise CountryFormatError(
-                    country=value,
-                    message="The `country` must not contain punctuation marks.",
+                raise CountryFormatException(
+                    detail="The `country` must not contain punctuation marks.",
                 )
 
             if any(character.isdigit() for character in value):
-                raise CountryFormatError(
-                    country=value,
-                    message="The `country` must not contain digits.",
+                raise CountryFormatException(
+                    detail="The `country` must not contain digits.",
                 )
 
             if not value.istitle():
-                raise CountryFormatError(
-                    country=value,
-                    message="The `country` must start with a capital letter.",
+                raise CountryFormatException(
+                    detail="The `country` must start with a capital letter.",
                 )
 
         return value
@@ -236,21 +213,18 @@ class UserBase(BaseModel):
         """
         if value:
             if any(character in punctuation for character in value):
-                raise CountryFormatError(
-                    country=value,
-                    message="The `region` must not contain punctuation marks.",
+                raise CountryFormatException(
+                    detail="The `region` must not contain punctuation marks.",
                 )
 
             if any(character.isdigit() for character in value):
-                raise CountryFormatError(
-                    country=value,
-                    message="The `region` must not contain digits.",
+                raise CountryFormatException(
+                    detail="The `region` must not contain digits.",
                 )
 
             if not value.istitle():
-                raise CountryFormatError(
-                    country=value,
-                    message="The `region` must start with a capital letter.",
+                raise CountryFormatException(
+                    detail="The `region` must start with a capital letter.",
                 )
 
         return value
@@ -352,9 +326,8 @@ class PostBase(BaseModel):
             or character in punctuation
             for character in value
         ):
-            raise TitleFormatError(
-                title=value,
-                message="The `title` must contain letters.",
+            raise TitleFormatException(
+                detail="The `title` must contain letters.",
             )
 
         return value
